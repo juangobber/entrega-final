@@ -1,0 +1,17 @@
+<div class="container mt-3">
+    <a href="/products">Back to products</a> 
+    <h1>This is your cart, {{user.first_name}}</h1>
+    <div class="mt-4" id="{{user.cart}}">
+        <ul class="list-group" id="cartProductList">
+            {{#each products}}
+                <li class="list-group-item d-flex mb-3">
+                    <div>{{this.productId.title}} - {{this.productId.description}} - ${{this.productId.price}} - quantity: {{this.quantity}} - TOTAL: {{#multiply this.productId.price quantity}}{{/multiply}}
+                    </div> <button type="button" id="{{this.productId._id}}" name="{{cart}}" class="btn btn-outline-danger btn-sm ms-auto p-2">delete</button>
+                </li>
+            {{/each}}
+        </ul>
+        <div><span>TOTAL: {{cartTotalValue}}</span></div>
+    </div>
+     <button type="button" name="{{user.cart}}" id="purchaseCart" class="btn btn-secondary">purchase</button>
+</div>
+

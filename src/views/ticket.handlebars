@@ -1,0 +1,19 @@
+<div class="container">
+<h1>This is your ticket </h1>
+<a  class="mt-3" href="/cart">Go to cart</a>
+<p>ticket ID: {{ticket._id}}</p>
+<p>date: {{ticket.purchase_datetime}}</p>
+<p>code: {{ticket.amount}}</p>
+<div class="mt-4" id="{{ticket._id}}">
+        <ul class="list-group" id="cartProductList">
+            {{#each ticket.products}}
+                <li class="list-group-item d-flex mb-3">
+                    <div>{{this.productId.title}} - {{this.productId.description}} - ${{this.productId.price}} - quantity: {{this.quantity}} - TOTAL: {{#multiply this.productId.price quantity}}{{/multiply}}
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+        <div><span>TOTAL: {{ticket.amount}}</span></div>
+    </div>
+    </div>
+
