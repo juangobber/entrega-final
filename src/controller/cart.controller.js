@@ -34,9 +34,10 @@ export class CartController {
 
     static async addProductToCart(req, res, next){
         const {cid, pid} = req.params
+        const user = req.session.user
         
         try {
-            const request = await cartService.addProduct(cid, pid)
+            const request = await cartService.addProduct(cid, pid, user)
             const response = successResponse(request)
             res.status(HTTP_STATUS.OK).json(response)
         }

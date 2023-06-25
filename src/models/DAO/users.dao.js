@@ -27,4 +27,16 @@ export class UsersDAO {
         const user = await UserModel.findOne(filter).lean()
         return user
     }
+
+    async deleteMany(filter) {
+        const inactiveUsers = await UserModel.find({lastLogin: { $lt: filter}}).lean()
+        const deleteUsers = await UserModel.deleteMany({lastLogin: { $lt: filter}})
+        console.log("deletedUsers: ", deleteUsers)
+        return inactiveUsers
+    }
+
+    async deleteUser(uid){
+        const deletedUser = await UserModel.findOneAndDelete({_id: uid})
+        return deletedUser
+    }
 }

@@ -17,7 +17,7 @@ export class CartService {
         return cart
     }
 
-    async addProduct(cid, pid){
+    async addProduct(cid, pid, user){
         const cartVerification = await cartDao.cartVerification(cid)
         if (!cartVerification) {
             throw new httpError("The cart doesn't exist", HTTP_STATUS.NOT_FOUND)
@@ -27,6 +27,12 @@ export class CartService {
         if (!productVerification) {
             throw new httpError("The product doesn't exist", HTTP_STATUS.NOT_FOUND)
         }
+
+        const getProduct = await productDao.getProductById(pid)
+        if (getProduct.owner == user.email){
+            throw new httpError("You own the product and can't buy it", HTTP_STATUS.BAD_REQUESTED)
+        }
+
         
         const productAlreadyExists = cartVerification.products.findIndex((product) => product.productId.equals(pid))
 

@@ -7,6 +7,7 @@ const seeCart = document.getElementById('seeCart')
 const userProductList = document.getElementById('userProductList')
 const cartProductList = document.getElementById('cartProductList')
 const purchaseCart = document.getElementById('purchaseCart')
+const usersTable = document.getElementById('usersTable')
 
 loginForm?.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -57,52 +58,56 @@ loginForm?.addEventListener('submit', (event) => {
     window.location.href = '/api/sessions/logout';
   };
 
-productContainerAdmin?.addEventListener('click', function(event){
+/*productContainerAdmin?.addEventListener('click', function(event){
     fetch(`/api/products/${event.target.id}`, {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json'
       }
     }).then(()=> window.location.href = '/products');
-})
+})*/
 
 seeCart?.addEventListener('click', function(event){
   window.location.href= '/cart'
 })
 
 productContainerAdmin?.addEventListener('click', function(event){
-    fetch(`/api/products/${event.target.id}`, {
+  event.stopPropagation() 
+  if (event.target.type == "button") {
+  fetch(`/api/products/${event.target.id}`, {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json'
       }
     }).then(()=> window.location.href = '/products');
+  }
 })
 
 userProductList?.addEventListener('click', function(event){
   const cartId = event.target.parentNode.parentNode.parentNode.getAttribute('id')
   const productId = event.target.id
-
-  fetch(`/api/carts/${cartId}/product/${productId}`, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(()=> window.location.href = '/products');
-  
+  if(event.target.type == "button") {
+    fetch(`/api/carts/${cartId}/product/${productId}`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(()=> window.location.href = '/products');
+  }  
 })
 
 cartProductList?.addEventListener('click', function(event){
   const cartId = event.target.parentNode.parentNode.parentNode.getAttribute('id')
-  console.log("Esto se esta ejecutando")
   const productId = event.target.id
-  console.log("cartId:", cartId)
+
+  if(event.target.type == "button"){
   fetch(`/api/carts/${cartId}/product/${productId}`, {
     method: 'delete',
     headers: {
       'Content-Type': 'application/json'
     }
   }).then(()=> window.location.href = '/cart');
+}
 })
 
 purchaseCart?.addEventListener('click', function(event){
@@ -116,3 +121,31 @@ purchaseCart?.addEventListener('click', function(event){
   }).then(response => response.json())
   .then(response => window.location.href = `/ticket/${response.ticket._id}`)
 })
+
+function updateUser(button) {
+  const row = button.closest('tr')
+  const select = row.querySelector('select')
+  const selectedValue = select.value
+  const userPayload = {role: selectedValue}
+  console.log("value de select:", selectedValue)
+  console.log("name del button", button.name)
+
+  fetch(`/api/users/${button.name}/${selectedValue}`, {
+    method:'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+    
+  }).then(response => window.location.href = `/users`)
+}
+
+function deleteUser(name) {
+  console.log("name del user", name)
+  fetch(`/api/users/${name}`, {
+    method:'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(response => response.json())
+  .then(response => window.location.href = `/users`)
+}

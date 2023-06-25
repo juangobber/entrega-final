@@ -25,9 +25,13 @@ const app = express()
 const multiplyHelper = function(a, b){
     return a * b
 }
+const compareOwner = function (a, b){
+    return a == b
+}
 app.engine('handlebars', handlebars.engine({
     helpers: {
-        multiply : multiplyHelper
+        multiply : multiplyHelper,
+        compare : compareOwner
     }
 }))
 app.set('views', __dirname+'/views')

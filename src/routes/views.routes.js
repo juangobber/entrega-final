@@ -2,8 +2,7 @@ import {Router} from 'express'
 import { ViewsController } from '../controller/views.controller.js'
 import { sessionMiddleware } from '../middleware/session.middleware.js'
 import  auth  from '../middleware/auth.middleware.js'
-
-
+import admin_auth from '../middleware/admin.middleware.js'
 
 const router = Router()
 
@@ -28,5 +27,8 @@ router.get('/chat', auth, ViewsController.chat)
 
 router.get('/ticket/:tid', ViewsController.ticket)
 
+router.get('/addproduct', ViewsController.createProduct)
+
+router.get('/users',admin_auth, ViewsController.getUsers)
 
 export default router

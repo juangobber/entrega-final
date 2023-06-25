@@ -1,0 +1,42 @@
+<div class="container mt-3">
+    <a href="/profile">Go back to profile</a>
+    <h1>this is a page to add a product</h1>
+
+    <div class="mt-4 mb-3">
+            <h4>Add a product</h4>
+            <form id="product-form">
+                <div class="mb-3">
+                    <label for="Title" class="form-label">Product title</label>
+                    <input type="text" class="form-control" id="productTitle" name="title">
+                </div>
+                <div class="mb-3">
+                    <label for="Description" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="productDescription" name="description">
+                </div>
+                <div class="mb-3">
+                    <label for="Price" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="productPrice" name="price">
+                </div>
+                <div class="mb-3">
+                    <label for="Code" class="form-label">Code</label>
+                    <input type="number" class="form-control" id="productCode" name="code">
+                </div>
+                <div class="mb-3">
+                    <label for="Stock" class="form-label">Stock</label>
+                    <input type="number" class="form-control" id="productStock" name="stock">
+                </div>
+                <div class="mb-3">
+                    <label for="Status" class="form-label">Status disponible</label>
+                    <select name="status" id="productStatus">
+                        <option value="1">Disponible</option>
+                        <option value="2">No disponible</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="Category" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="productCategory" name="category">
+                </div>
+                <button type="submit" class="btn btn-primary">Add product to DB</button>
+            </form>
+        </div>
+</div>

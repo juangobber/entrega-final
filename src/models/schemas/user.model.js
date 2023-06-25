@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   cart: {type: mongoose.Schema.Types.ObjectId, ref:"carts"},
   password: { type: String },
   githubLogin: {type: String, unique: true},
-  role: { type: String }
+  role: { type: String },
+  lastLogin : {type: Date, default: Date.now}
 });
 
 const UserModel = mongoose.model(userCollection, userSchema);

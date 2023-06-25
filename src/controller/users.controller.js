@@ -40,5 +40,42 @@ export class UsersController {
             next(error)
         }
     }
+
+    static async deleteUsers(req, res, next) {
+        try {
+            const deletedUsers = await usersService.deleteUsers()
+            const response = successResponse(deletedUsers)
+            res.status(HTTP_STATUS.OK).json(response)
+        } 
+        catch(error) {
+            next(error)
+        }
+    }
+
+    static async updateUser(req, res, next){
+        const {uid} = req.params
+        const {role} = req.params
+        console.log("Hasta acá llego", role)
+        console.log("req.params", uid)
+        try{
+            const updateUser = await usersService.updateUser(uid, role)
+            const response = successResponse(updateUser)
+            res.status(HTTP_STATUS.OK).json(response)
+        }
+        catch(error){
+            next(error)
+        }
+    }
+
+    static async deleteUser(req, res, next) {
+        const {uid} = req.params
+        try{
+            const deleteUser = await usersService.deleteUser(uid)
+            const response = successResponse(deleteUser)
+            res.status(HTTP_STATUS.OK).json(response)
+        }catch(error){
+            next(error)
+        }
+    }
         
 }

@@ -15,6 +15,12 @@ export const loginController = async (req, res, next) => {
       console.log('user not found');
       return res.redirect('/');
     }
+    
+    //Actualizar la hora y fecha de login
+    const actualDate = new Date()
+    const filter = {_id: user._id}
+    const update = {lastLogin: actualDate }
+    const updateLoginDate = await UserModel.findOneAndUpdate(filter, update)
 
     userInfo = {
         _id: user._id,
@@ -23,6 +29,8 @@ export const loginController = async (req, res, next) => {
         email: user.email,
         cart: user.cart,
         admin: user.email.includes('@coder.com'),
+        role: user.role,
+        premium: user.role == 'PREMIUM',
         githubLogin : user.githubLogin ?? null
       }
 

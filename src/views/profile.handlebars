@@ -2,13 +2,16 @@
     <h3>Your Profile</h3>
 
     <ul class="list-group list-group-flush">
-    <li class="list-group-item"> <span class="fw-bold">Name:</span>  {{user.first_name}} {{user.last_name}} {{#if user.admin}} <span style="color: green">(admin)</span> {{else}} <span style="color: blue"> (user)</span>{{/if}}</li>
+    <li class="list-group-item"> <span class="fw-bold">Name:</span>  {{user.first_name}} {{user.last_name}} {{#if user.admin}} <span style="color: green">(admin)</span> {{else}} <span style="color: blue"> (user)</span>{{/if}}{{#if user.premium}} 
+    <span style="color: rgb(255, 115, 0)">(premium👑)</span>{{/if}}</li> 
     <li class="list-group-item"><span class="fw-bold">Age:</span> {{user.age}}</li>
     <li class="list-group-item"><span class="fw-bold">Email:</span> {{user.email}}</li>
     </ul>
 
     <a  class="mt-3" href="/products">See our products</a>
     <a  class="mt-3" href="/chat">Go to chatroom</a>
+    {{#if user.admin}}<a  class="mt-3" href="/users">Users control</a> {{/if}}
+     {{#if user.premium}}<a  class="mt-3" href="/addproduct">Add a product</a> {{/if}}
     <div>
         <button type="button" class="btn btn-danger mt-3 btn-sm" onclick="return logout()">Log out</button>
     </div>
