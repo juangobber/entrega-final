@@ -60,10 +60,6 @@ export class UsersService {
     async createUserGithub(payload){
         const {email, first_name, last_name, age, password, githubLogin} = payload
 
-       /* if(!email|| !first_name|| !last_name|| !age|| !password){
-            throw new httpError("Missing fields", HTTP_STATUS.BAD_REQUESTED)
-        }*/
-
         const newCart = await cartDao.createCart()
 
         const newUserPayload = {
@@ -106,7 +102,7 @@ export class UsersService {
                     from: `Coder Test ${ENV.MAIL}`,
                     to: `${email}`,
                     subject: 'Test Email from node server',
-                    html: `<h1>Hi ${first_name}! this is a test!</h1>`
+                    html: `<h1>Hi ${first_name}! this is a test!</h1> <br> <p>Your account has been deleted because you haven't used it in 2 days</p>`
                 }
         
                 const mail = await transporter.sendMail(mailParams)

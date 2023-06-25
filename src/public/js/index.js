@@ -8,6 +8,7 @@ const userProductList = document.getElementById('userProductList')
 const cartProductList = document.getElementById('cartProductList')
 const purchaseCart = document.getElementById('purchaseCart')
 const usersTable = document.getElementById('usersTable')
+const deleteInactiveUsers = document.getElementById('deleteInactiveUsers')
 
 loginForm?.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -111,6 +112,16 @@ purchaseCart?.addEventListener('click', function(event){
     }
   }).then(response => response.json())
   .then(response => window.location.href = `/ticket/${response.ticket._id}`)
+})
+
+deleteInactiveUsers?.addEventListener('click', function(event){
+  fetch(`/api/users`, {
+    method: 'delete',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(()=> window.location.href = '/users')
+  console.log("Executed deletion")
 })
 
 function updateUser(button) {
