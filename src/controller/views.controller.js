@@ -40,7 +40,7 @@ export class ViewsController {
                 prevLink: (response.hasPrevPage ? `/products/?limit=${response.limit}&page=${response.prevPage}` : null),
                 nextLink: (response.hasNextPage ? `/products/?limit=${response.limit}&page=${response.nextPage}` : null)
             }
-            console.log("hasNextPage", data.hasNextPage)
+
             const hasNextPage = data.hasNextPage
             const hasPrevPage = data.hasPrevPage
             const renderProducts = data.payload
@@ -84,11 +84,10 @@ export class ViewsController {
 
     static async ticket(req, res, next){
         const {tid} = req.params
-        console.log("tid", tid)
+
         try{
 
         const ticket = await ticketService.getTicketById(tid)
-        console.log("ticket de ID", ticket)
         res.render('ticket', {ticket})
 
        } catch(error){
@@ -100,7 +99,6 @@ export class ViewsController {
 
     static async getUsers (req, res, next) {
         const users = await usersService.getUsers()
-        console.log("users", users)
         res.render('users', {users})
     }
 

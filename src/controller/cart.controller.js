@@ -76,26 +76,12 @@ export class CartController {
     static async purchaseCart(req, res, next){
         const {cid} = req.params
         const user = req.session.user
-        console.log("user en cart", user)
+
         try{
             const response = await ticketService.createTicket(cid, user)
-            console.log("RESPUESTA TICKET : ", response)
             res.status(HTTP_STATUS.OK).json(response)
         }catch(error){
             next(error)
         }
     }
-/*
-    static async purchaseCartTest(req, res, next){
-        const {cid} = req.params
-        const user = {email: "ernesto@gmail.com"}
-        try{
-            const response = await ticketService.createTicket(cid, user)
-            console.log("RESPUESTA TICKET : ", response)
-            res.status(HTTP_STATUS.OK).json(response)
-
-        }catch(error){
-            next(error)
-        }
-    }*/
 }

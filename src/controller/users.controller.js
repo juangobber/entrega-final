@@ -5,7 +5,7 @@ const usersService = new UsersService()
 
 export class UsersController {
     static async getUsers(req, res, next){
-        console.log("Hasta acá llegue")
+
         try{
             const users = await usersService.getUsers()
             const response = successResponse(users)
@@ -17,7 +17,7 @@ export class UsersController {
     }
 
     static async getUserById(req, res, next){
-        console.log("Hasta acá llegue")
+
         const {uid} = req.body
         try{
             const users = await usersService.getUserById(uid)
@@ -55,8 +55,7 @@ export class UsersController {
     static async updateUser(req, res, next){
         const {uid} = req.params
         const {role} = req.params
-        console.log("Hasta acá llego", role)
-        console.log("req.params", uid)
+
         try{
             const updateUser = await usersService.updateUser(uid, role)
             const response = successResponse(updateUser)

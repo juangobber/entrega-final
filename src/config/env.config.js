@@ -8,7 +8,8 @@ const ENV = {
     CLIENT_ID : process.env.CLIENT_ID,
     CLIENT_SECRET : process.env.CLIENT_SECRET,
     SESION_SECRET : process.env.SESSION_SECRET,
-    GMAIL_PASS : process.env.GMAIL_PASS
+    GMAIL_PASS : process.env.GMAIL_PASS,
+    MAIL : process.env.MAIL
 }
 
 export default ENV

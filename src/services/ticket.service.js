@@ -12,7 +12,6 @@ export class TicketService {
     async createTicket(cid, user){
         const {email} = user
         const cart = await cartService.getCart(cid)
-        console.log("createTicket - cart: ", cart)
         
         let purchaseAmount = 0
         let productsInStock = []
@@ -27,9 +26,7 @@ export class TicketService {
         }   
                
         });
-        console.log("user = ", user )
-        console.log("user.email = ", user.email)
-        console.log("user.githubLogin = ", user.githubLogin)
+
         const newTicketPayload = {
             products: productsInStock,
             code: uuidv4(),
@@ -40,7 +37,6 @@ export class TicketService {
 
         const request = await cartService.updateCartAfterPurchase(cid, productsNoStock)
         const ticket = await ticketDao.createTicket(newTicketPayload)
-        console.log("response ", ticket)
         return {ticket, productsNoStock}
     }
 

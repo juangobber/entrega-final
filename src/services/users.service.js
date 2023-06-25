@@ -1,11 +1,9 @@
-import { CartController } from "../controller/cart.controller.js"
 import { CartDao } from "../models/DAO/carts.dao.js"
 import { UsersDAO } from "../models/DAO/users.dao.js"
 import { HTTP_STATUS, hashPassword, httpError } from "../utils/api.utils.js"
-import { CartService } from "./cart.service.js"
 import ENV from "../config/env.config.js"
 import nodemailer from 'nodemailer'
-import { deleteModel } from "mongoose"
+
 
 const cartDao = new CartDao()
 const usersDAO = new UsersDAO()
@@ -15,7 +13,7 @@ const transporter = nodemailer.createTransport({
     secure: true,
     port: 465,
     auth: {
-        user: 'juangobberph@gmail.com',
+        user: ENV.MAIL,
         pass: ENV.GMAIL_PASS
     }
 })
@@ -54,7 +52,6 @@ export class UsersService {
             email: email,
             cart: newCart._id
         }
-        console.log("newUserPayload Service: ", newUserPayload)
 
         const newUser = await usersDAO.createUser(newUserPayload);
         return newUser
@@ -80,7 +77,6 @@ export class UsersService {
             githubLogin: githubLogin
 
         }
-        console.log("newUserPayload Service: ", newUserPayload)
 
         const newUser = await usersDAO.createUser(newUserPayload);
         return newUser
@@ -107,21 +103,17 @@ export class UsersService {
                 const {first_name, email} = user
 
                 const mailParams = {
-                    from: 'Coder Test <juangobberph@gmail.com>',
+                    from: `Coder Test ${ENV.MAIL}`,
                     to: `${email}`,
                     subject: 'Test Email from node server',
                     html: `<h1>Hi ${first_name}! this is a test!</h1>`
                 }
         
                 const mail = await transporter.sendMail(mailParams)
-                console.log("Mailing ", mail)
                 return {user: email, mail: mail}
             })
         } else {}
         
-
-        console.log("Deleted users length",deleteUsers.length)
-
         return filteredUsersData
         
     }

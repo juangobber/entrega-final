@@ -1,7 +1,6 @@
 
 import productsModel from "../schemas/products.model.js"
 
-
 export class ProductsDao {
     
     async getProducts(filter, options){
@@ -15,9 +14,7 @@ export class ProductsDao {
     }
 
     async addProduct(productPayload){
-        console.log("products DAO payload: ", productPayload)
         const product = await productsModel.create(productPayload)
-        console.log("product despues de la peticion ", product)
         return product
     }
 

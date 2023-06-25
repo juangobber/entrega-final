@@ -32,7 +32,6 @@ export class ProductsController {
     static async addProduct(req, res, next){
         const productPayload = req.body
         const userPayload = req.session.user
-        console.log("Products controller payload", productPayload)
         try {
         const newCreatedProduct = await productsService.addProduct(productPayload, userPayload)
         const response = successResponse(newCreatedProduct)

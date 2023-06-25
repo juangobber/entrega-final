@@ -58,15 +58,6 @@ loginForm?.addEventListener('submit', (event) => {
     window.location.href = '/api/sessions/logout';
   };
 
-/*productContainerAdmin?.addEventListener('click', function(event){
-    fetch(`/api/products/${event.target.id}`, {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(()=> window.location.href = '/products');
-})*/
-
 seeCart?.addEventListener('click', function(event){
   window.location.href= '/cart'
 })
@@ -112,7 +103,7 @@ cartProductList?.addEventListener('click', function(event){
 
 purchaseCart?.addEventListener('click', function(event){
   const cartId = event.target.getAttribute('name')
-  console.log(event.target.name)
+
   fetch(`/api/carts/${event.target.name}/purchase`, {
     method:'PUT',
     headers: {
@@ -127,8 +118,6 @@ function updateUser(button) {
   const select = row.querySelector('select')
   const selectedValue = select.value
   const userPayload = {role: selectedValue}
-  console.log("value de select:", selectedValue)
-  console.log("name del button", button.name)
 
   fetch(`/api/users/${button.name}/${selectedValue}`, {
     method:'PUT',
@@ -140,7 +129,6 @@ function updateUser(button) {
 }
 
 function deleteUser(name) {
-  console.log("name del user", name)
   fetch(`/api/users/${name}`, {
     method:'DELETE',
     headers: {

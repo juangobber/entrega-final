@@ -8,7 +8,6 @@ export class TicketDao {
     }
 
     async getTicketById(tid){
-        console.log("tid DAO", tid)
         const ticket = await ticketModel.findById(tid).populate('products.productId').lean()
         return ticket
     }

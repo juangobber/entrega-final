@@ -1,4 +1,3 @@
-import { HTTP_STATUS, httpError } from "../../utils/api.utils.js";
 import cartModel from "../schemas/cart.model.js";
 
 export class CartDao {

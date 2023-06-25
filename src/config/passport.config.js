@@ -2,11 +2,8 @@ import passport from "passport";
 import local from "passport-local"
 import { UsersService } from "../services/users.service.js";
 import {Strategy as GithubStrategy } from 'passport-github2'
-import { hashPassword, isValidPassword } from "../utils/api.utils.js";
+import { isValidPassword } from "../utils/api.utils.js";
 import ENV from "./env.config.js";
-import UserModel from "../models/schemas/user.model.js";
-
-
 
 const usersService = new UsersService()
 const LocalStrategy = local.Strategy
@@ -35,7 +32,7 @@ function initializePassport () {
             age,
             password
           };
-          console.log("payload", payload);
+          
           const request = await usersService.createUser(payload);
           return done(null, request);
         } catch (error) {
